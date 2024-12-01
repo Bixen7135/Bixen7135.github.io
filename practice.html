@@ -1,0 +1,183 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Практика циклов в Python</title>
+  <script src="https://cdn.jsdelivr.net/npm/skulpt/dist/skulpt.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/skulpt/dist/skulpt-stdlib.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #eef2f7;
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(to right, #4caf50, #2e7d32);
+      color: white;
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      margin: 0;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      background: #333;
+      color: white;
+      z-index: 1000;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      margin: 0;
+      padding: 10px 0;
+    }
+
+    nav ul li {
+      margin: 0 15px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.2rem;
+    }
+
+    nav ul li a.active {
+      font-weight: bold;
+      text-decoration: underline;
+      color: #4caf50;
+    }
+
+    main {
+      padding: 20px;
+      text-align: center;
+      ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      background: #4caf50;
+      margin: 10px 0;
+      padding: 15px;
+      border-radius: 5px;
+      color: white;
+      text-align: center;
+      font-size: 1.2rem;
+    }
+    li a {
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+    }
+    li a:hover {
+      text-decoration: underline;
+    }
+    }
+
+
+
+      section {
+        margin-bottom: 40px;
+      }
+
+      section h2 {
+        border-bottom: 2px solid #4caf50;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+        font-size: 2rem;
+      }
+
+      pre {
+        background: #f4f4f4;
+        padding: 10px;
+        border-radius: 5px;
+        overflow-x: auto;
+      }
+
+      button {
+        background-color: #4caf50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-right: 10px;
+        transition: background-color 0.3s;
+      }
+
+      button:hover {
+        background-color: #45a049;
+      }
+
+      textarea {
+        width: 100%;
+        height: 150px;
+        margin-bottom: 10px;
+        font-family: monospace;
+      }
+
+      #output {
+        background: #333;
+        color: #fff;
+        padding: 10px;
+        border-radius: 5px;
+        margin-top: 10px;
+        overflow-x: auto;
+      }
+      footer {
+        text-align: center;
+        padding: 20px 0;
+        background: #333;
+        color: white;
+      }
+
+      @media (prefers-color-scheme: white) {
+        body {
+          background-color: #121212;
+          color: #ffffff;
+        }
+        nav, footer {
+          background-color: #1c1c1c;
+        }
+      }
+    </style>
+</head>
+<body>
+  <header>
+    <h1>Практика циклов в Python</h1>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="index.html">Главная</a></li>
+      <li><a href="theory.html">Теория</a></li>
+      <li><a href="practice.html" class="active">Практика</a></li>
+      <li><a href="profile.html">Личный кабинет</a></li>
+    </ul>
+  </nav>
+
+  <main>
+   <h2>Выберите задачу:</h2>
+   <ul>
+     <li><a href="task1.html">1. Выведи количество чисел между n и m</a></li>
+     <li><a href="task2.html">2. Таблица умножения</a></li>
+   </ul>
+ </main>
+
+ <footer>
+   <p>© 2024 Учебный портал Python</p>
+ </footer>
+</body>
+</html>

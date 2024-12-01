@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Личный кабинет</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #eef2f7;
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(to right, #4caf50, #2e7d32);
+      color: white;
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      margin: 0;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      background: #333;
+      color: white;
+      z-index: 1000;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      margin: 0;
+      padding: 10px 0;
+    }
+
+    nav ul li {
+      margin: 0 15px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.2rem;
+    }
+
+    nav ul li a.active {
+      font-weight: bold;
+      text-decoration: underline;
+      color: #4caf50;
+    }
+
+    main {
+      padding: 20px;
+      text-align: center;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px 0;
+      background: #333;
+      color: white;
+    }
+
+    .profile-section {
+      padding: 20px;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      max-width: 600px;
+      margin: 20px auto;
+      text-align: left;
+    }
+
+    .profile-section h2 {
+      margin-top: 0;
+    }
+
+    .profile-section p {
+      font-size: 1.1rem;
+    }
+
+    .profile-btn {
+      display: inline-block;
+      background: #00796b;
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 4px;
+      margin-top: 10px;
+    }
+
+    .profile-btn:hover {
+      background: #004d40;
+    }
+
+    .logout-btn {
+      display: inline-block;
+      background: #f44336;
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 4px;
+      margin-top: 10px;
+    }
+
+    .logout-btn:hover {
+      background: #d32f2f;
+    }
+
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Личный кабинет</h1>
+    <p>Добро пожаловать в ваш личный кабинет!</p>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="index.html">Главная</a></li>
+      <li><a href="theory.html">Теория</a></li>
+      <li><a href="practice.html">Практика</a></li>
+      <li><a href="profile.html" class="active">Личный кабинет</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section class="profile-section">
+      <h2>Ваши данные</h2>
+      <p><strong>Имя:</strong> ~ </p>
+      <p><strong>Email:</strong> ~ </p>
+      <p><strong>Дата регистрации:</strong> ~ </p>
+      <a href="profile-settings.html" class="profile-btn">Редактировать профиль</a>
+      <a href="login.html" class="logout-btn">Выйти</a>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2024 Учебный портал. Все права защищены.</p>
+  </footer>
+
+  <script>
+    // Загружаем статистику из LocalStorage (если есть)
+    function loadStats() {
+      const solvedTasks = localStorage.getItem("solvedTasks") || 0;
+      const totalScore = localStorage.getItem("totalScore") || 0;
+
+      document.getElementById("solved-tasks").innerText = `Решено задач: ${solvedTasks}`;
+      document.getElementById("total-score").innerText = `Получено баллов: ${totalScore}`;
+    }
+
+    // Обновляем статистику в LocalStorage
+    function updateStats(score) {
+      let solvedTasks = parseInt(localStorage.getItem("solvedTasks") || "0");
+      let totalScore = parseInt(localStorage.getItem("totalScore") || "0");
+
+      solvedTasks += 1;
+      totalScore += score;
+
+      localStorage.setItem("solvedTasks", solvedTasks);
+      localStorage.setItem("totalScore", totalScore);
+
+      loadStats(); // Обновляем отображение статистики
+    }
+
+    document.addEventListener("DOMContentLoaded", loadStats);
+  </script>
+</body>
+</html>

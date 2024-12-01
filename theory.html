@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Циклы в Python: Теория</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #eef2f7;
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(to right, #4caf50, #2e7d32);
+      color: white;
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      margin: 0;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      background: #333;
+      color: white;
+      z-index: 1000;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      margin: 0;
+      padding: 10px 0;
+    }
+
+    nav ul li {
+      margin: 0 15px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.2rem;
+    }
+
+    nav ul li a.active {
+      font-weight: bold;
+      text-decoration: underline;
+      color: #4caf50;
+    }
+
+    main {
+      padding: 20px;
+      text-align: left;
+    }
+
+    section {
+      margin-bottom: 40px;
+    }
+
+    section h2 {
+      border-bottom: 2px solid #4caf50;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+      font-size: 2rem;
+    }
+
+    pre {
+      background: #f4f4f4;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px 0;
+      background: #333;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Циклы в Python: Теория</h1>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="index.html">Главная</a></li>
+      <li><a href="theory.html" class="active">Теория</a></li>
+      <li><a href="practice.html">Практика</a></li>
+      <li><a href="profile.html">Личный кабинет</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section>
+      <h2>1. Что такое цикл?</h2>
+      <p>Цикл — это команда компьютеру повторять одно и то же действие несколько раз.</p>
+      <p>Пример из жизни: если нужно 5 раз сказать "Привет!" другу, ты можешь сделать это вручную или попросить кого-то сделать это за тебя.</p>
+      <pre>
+for i in range(5):
+    print("Привет!")
+      </pre>
+    </section>
+
+    <section>
+      <h2>2. Два типа циклов в Python</h2>
+      <ul>
+        <li><strong>for</strong> — используется, когда мы знаем, сколько раз надо повторить действие (перебрать числа, элементы списка).</li>
+        <li><strong>while</strong> — используется, когда мы повторяем действие до тех пор, пока выполняется условие (например, проверка пароля).</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>3. Цикл for: Понятно и просто</h2>
+      <h3>Пример 1: Печатаем числа от 0 до 4</h3>
+      <pre>
+for i in range(5):
+    print(i)
+      </pre>
+      <p><strong>Как работает:</strong> <code>range(5)</code> создаёт последовательность: 0, 1, 2, 3, 4. Переменная <code>i</code> последовательно принимает эти значения.</p>
+    </section>
+
+    <section>
+      <h3>Пример 2: Перебираем список</h3>
+      <pre>
+фрукты = ["яблоко", "банан", "вишня"]
+for фрукт in фрукты:
+    print(фрукт)
+      </pre>
+      <p>Вывод:</p>
+      <ul>
+        <li>яблоко</li>
+        <li>банан</li>
+        <li>вишня</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>4. Цикл while: Повторяем до выполнения условия</h2>
+      <pre>
+x = 0
+while x < 3:
+    print(x)
+    x += 1
+      </pre>
+      <p><strong>Как работает:</strong> Проверяется условие <code>x < 3</code>. Если оно истинно, выполняется код внутри цикла.</p>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2024 Учебный портал Python
+  </footer>
+</body>
+</html>

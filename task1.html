@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Задача 1 - Выведи числа между n и m</title>
+  <script src="https://cdn.jsdelivr.net/npm/skulpt/dist/skulpt.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/skulpt/dist/skulpt-stdlib.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/codemirror.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/mode/python/python.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #eef2f7;
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(to right, #4caf50, #2e7d32);
+      color: white;
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      margin: 0;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      background: #333;
+      color: white;
+      z-index: 1000;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      margin: 0;
+      padding: 10px 0;
+    }
+
+    nav ul li {
+      margin: 0 15px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.2rem;
+    }
+
+    nav ul li a.active {
+      font-weight: bold;
+      text-decoration: underline;
+      color: #4caf50;
+    }
+
+    main {
+      padding: 20px;
+      text-align: center;
+    }
+
+    textarea, input {
+      width: 100%;
+      font-family: monospace;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      padding: 10px;
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+
+    textarea {
+      height: 150px;
+    }
+
+    #output {
+      background: #333;
+      color: #fff;
+      padding: 10px;
+      border-radius: 5px;
+      margin-top: 10px;
+      overflow-x: auto;
+      overflow-y: auto;
+      max-height: 300px;
+      white-space: pre-wrap;
+    }
+
+    button {
+      background-color: #4caf50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+      margin-top: 10px;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+
+    button:hover {
+      background-color: #45a049;
+      transform: scale(1.05);
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px 0;
+      background: #333;
+      color: white;
+    }
+
+    #codeEditor {
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      height: 300px;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Практика циклов в Python</h1>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="index.html">Главная</a></li>
+      <li><a href="theory.html">Теория</a></li>
+      <li><a href="practice.html">Практика</a></li>
+      <li><a href="profile.html">Личный кабинет</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <h2>Задача 1: Выведи числа между n и m</h2>
+    <p>Напишите программу, которая выводит числа между n и m.</p>
+    <div id="codeEditor"></div>
+    <h3>Input:</h3>
+    <textarea id="inputArea" placeholder="# Входные данные"></textarea>
+    <button onclick="runPython()">Run</button>
+    <h3>Output:</h3>
+    <div id="output"></div>
+    <button onclick="runTests()">Пройти все тесты</button>
+    <h3 id="test-result"></h3>
+  </main>
+
+  <footer>
+    <p>© 2024 Учебный портал Python</p>
+  </footer>
+
+  <script>
+    let codeMirror;
+    document.addEventListener("DOMContentLoaded", () => {
+      codeMirror = CodeMirror(document.getElementById("codeEditor"), {
+        mode: "python",
+        lineNumbers: true,
+        indentUnit: 4,
+        tabSize: 4,
+        matchBrackets: true,
+        autoCloseBrackets: true,
+        theme: "default",
+        value: "# Ваш код здесь\nprint('Hello, World!')"
+      });
+    });
+
+    function outf(text) {
+      const output = document.getElementById("output");
+      output.innerHTML += text + "\n";
+    }
+
+    function builtinRead(x) {
+      if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined) {
+        throw `File not found: '${x}'`;
+      }
+      return Sk.builtinFiles["files"][x];
+    }
+
+    function runPython() {
+      const code = codeMirror.getValue();
+      const input = document.getElementById("inputArea").value;
+      const output = document.getElementById("output");
+      output.innerHTML = ""; // Очистка предыдущего результата
+
+      Sk.pre = "output";
+      Sk.configure({
+        output: outf,
+        read: builtinRead,
+        inputfun: function() {
+          return input.split("\n").shift(); // Берёт одну строку из поля ввода
+        },
+        inputfunTakesPrompt: true
+      });
+
+      Sk.misceval.asyncToPromise(() => Sk.importMainWithBody("<stdin>", false, code))
+        .then(() => outf("\n[Программа завершена]"))
+        .catch(err => outf(err.toString()));
+    }
+
+    async function runTests() {
+  const code = codeMirror.getValue();
+  const testCases = [
+          { input: "2 5\n", expectedOutput: "3\n4\n" },
+          { input: "1 6\n", expectedOutput: "2\n3\n4\n5\n" },
+          { input: "0 10\n", expectedOutput: "1\n2\n3\n4\n5\n6\n7\n8\n9\n" },
+          { input: "10 15\n", expectedOutput: "11\n12\n13\n14\n" },
+          { input: "-5 5\n", expectedOutput: "-4\n-3\n-2\n-1\n0\n1\n2\n3\n4\n" },
+          { input: "-2 2\n", expectedOutput: "-1\n0\n1\n" },
+          { input: "3 8\n", expectedOutput: "4\n5\n6\n7\n" },
+          { input: "6 12\n", expectedOutput: "7\n8\n9\n10\n11\n" },
+          { input: "7 9\n", expectedOutput: "8\n" },
+          { input: "100 110\n", expectedOutput: "101\n102\n103\n104\n105\n106\n107\n108\n109\n" }
+      ];
+
+  let score = 0;
+  for (const testCase of testCases) {
+    let output = "";
+    Sk.configure({
+      output: (text) => output += text,
+      read: builtinRead,
+      inputfun: () => testCase.input,
+      inputfunTakesPrompt: true
+    });
+
+    try {
+      await Sk.misceval.asyncToPromise(() => Sk.importMainWithBody("<stdin>", false, code));
+      if (output.trim() === testCase.expectedOutput.trim()) {
+        score += 10;
+      }
+    } catch (err) {
+      output += `Ошибка: ${err}`;
+    }
+  }
+
+  const result = document.getElementById("test-result");
+  result.textContent = `Вы набрали ${score} из 100 баллов. ${score === 100 ? "Задача решена!" : "Попробуйте еще раз."}`;
+
+  // Обновляем статистику
+  updateStats(score);
+}
+  </script>
+</body>
+</html>

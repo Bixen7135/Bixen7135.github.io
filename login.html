@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<title>Форма входа</title>
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #eef2f7;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    .container {
+        padding: 20px;
+        background-color: #ffffff;
+        color: #000000;
+        max-width: 400px;
+        width: 100%;
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        animation: fadeIn 1s ease-in-out;
+    }
+
+    h1, p {
+        margin: 0 0 15px;
+        text-align: center;
+    }
+
+    input[type="email"], input[type="password"] {
+        width: 100%;
+        padding: 12px;
+        margin: 8px 0 20px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        background-color: #f9f9f9;
+        transition: background-color 0.3s, border-color 0.3s;
+    }
+
+    input[type="email"]:focus, input[type="password"]:focus {
+        background-color: #e0f7fa;
+        border-color: #00796b;
+        outline: none;
+    }
+
+    .loginbtn {
+        width: 100%;
+        background-color: #00796b;
+        color: white;
+        padding: 15px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s;
+    }
+
+    .loginbtn:hover {
+        background-color: #004d40;
+    }
+
+    a {
+        color: dodgerblue;
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    .signin {
+        background-color: #f1f1f1;
+        padding: 16px;
+        text-align: center;
+        border-radius: 4px;
+        margin-top: 20px;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+</style>
+</head>
+<body>
+
+  <form action="index.html" method="POST" onsubmit="return validateForm()">
+  <div class="container">
+    <h1>Вход</h1>
+    <p>Пожалуйста, введите ваши данные для входа.</p>
+    <hr>
+
+    <label for="email"><b>Электронная почта</b></label>
+    <input type="email" placeholder="Введите электронную почту" name="email" id="email" required>
+
+    <label for="psw"><b>Пароль</b></label>
+    <input type="password" placeholder="Введите пароль" name="psw" id="psw" required>
+
+    <div id="error-message" style="color: red; display: none;">Неверная электронная почта или пароль!</div>
+
+    <hr>
+    <p>Нет аккаунта? <a href="register.html">Зарегистрируйтесь здесь</a>.</p>
+
+    <button type="submit" class="loginbtn">Войти</button>
+  </div>
+</form>
+
+<script>
+    function validateForm() {
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('psw').value;
+        const errorMessage = document.getElementById('error-message');
+
+        if (!email || !password) {
+            errorMessage.textContent = "Все поля обязательны для заполнения!";
+            errorMessage.style.display = 'block';
+            return false;
+        }
+
+        errorMessage.style.display = 'none';
+        return true;
+    }
+</script>
+
+</body>
+</html>
