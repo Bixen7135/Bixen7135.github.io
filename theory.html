@@ -4,6 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Циклы в Python: Теория</title>
+  <script src="https://cdn.jsdelivr.net/npm/skulpt/dist/skulpt.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/skulpt/dist/skulpt-stdlib.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/codemirror.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/mode/python/python.min.js"></script>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -79,6 +84,56 @@
       border: 1px solid #ddd;
       border-radius: 5px;
       overflow-x: auto;
+    }
+
+    textarea, input {
+      width: 100%;
+      font-family: monospace;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      padding: 10px;
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+
+    textarea {
+      height: 150px;
+    }
+
+    #output {
+      background: #333;
+      color: #fff;
+      padding: 10px;
+      border-radius: 5px;
+      margin-top: 10px;
+      overflow-x: auto;
+      overflow-y: auto;
+      max-height: 300px;
+      white-space: pre-wrap;
+    }
+    button {
+      background-color: #4caf50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+      margin-top: 10px;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+
+    button:hover {
+      background-color: #45a049;
+      transform: scale(1.05);
+    }
+
+    #codeEditor {
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      height: 300px;
+      text-align: left;
     }
 
     footer {
@@ -157,10 +212,161 @@ while x < 3:
       </pre>
       <p><strong>Как работает:</strong> Проверяется условие <code>x < 3</code>. Если оно истинно, выполняется код внутри цикла.</p>
     </section>
+
+    <section>
+      <h2>5. Частые ошибки</h2>
+      <h3>Ошибка 1: Отсутствие отступов</h3>
+      <pre>
+for i in range(5):
+print("Привет!")  # Ошибка: Нет отступа
+      </pre>
+      <p><strong>Решение:</strong> В Python отступы обязательны.</p>
+      <pre>
+for i in range(5):
+    print("Привет!")  # Правильный код
+      </pre>
+
+      <h3>Ошибка 2: Бесконечный цикл</h3>
+      <pre>
+x = 0
+while x < 3:
+    print(x)  # Ошибка: x не изменяется
+      </pre>
+      <p><strong>Решение:</strong> Не забудьте изменять переменную внутри цикла.</p>
+      <pre>
+x = 0
+while x < 3:
+    print(x)
+    x += 1  # Правильный код
+      </pre>
+    </section>
+
+    <section>
+      <h2>6. Вложенные циклы</h2>
+      <p>Циклы могут быть вложены друг в друга. Пример: создадим таблицу умножения.</p>
+      <pre>
+for i in range(1, 4):
+    for j in range(1, 4):
+        print(i * j, end=" ")
+    print()
+      </pre>
+      <p>Вывод:</p>
+      <pre>
+1 2 3
+2 4 6
+3 6 9
+      </pre>
+    </section>
+
+    <section>
+      <h2>7. Управляющие конструкции: break и continue</h2>
+      <h3>Break</h3>
+      <p>Прерывает выполнение цикла:</p>
+      <pre>
+for i in range(5):
+    if i == 3:
+        break
+    print(i)
+      </pre>
+      <p>Вывод: 0, 1, 2</p>
+
+      <h3>Continue</h3>
+      <p>Пропускает оставшуюся часть текущей итерации:</p>
+      <pre>
+for i in range(5):
+    if i == 3:
+        continue
+    print(i)
+      </pre>
+      <p>Вывод: 0, 1, 2, 4</p>
+    </section>
+
+    <section>
+      <h2>8. Советы и полезные практики</h2>
+      <ul>
+        <li>Если цикл работает бесконечно, проверьте условие в `while` или логику в `for`.</li>
+        <li>Используйте вложенные циклы осторожно, чтобы не усложнять код.</li>
+        <li>Не забывайте о функциях <code>break</code> и <code>continue</code> для управления потоками.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>9. Проверь себя</h2>
+      <p>Какой будет результат выполнения этого кода?</p>
+      <pre>
+for i in range(3):
+    print(i * 2)
+      </pre>
+      <ul>
+        <li><button onclick="alert('Неправильно. Попробуйте снова!')">1, 2, 3</button></li>
+        <li><button onclick="alert('Правильно!')">0, 2, 4</button></li>
+        <li><button onclick="alert('Неправильно. Подумайте еще!')">0, 1, 4</button></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>10. Попробуйте сами!</h2>
+      <p>Попробуйте запустить этот код и измените его:</p>
+      <div id="codeEditor"></div>
+      <h3>Input:</h3>
+      <textarea id="inputArea" placeholder="# Входные данные"></textarea>
+      <button onclick="runPython()">Run</button>
+      <h3>Output:</h3>
+      <div id="output"></div>
+    </section>
   </main>
 
   <footer>
     &copy; 2024 Учебный портал Python
   </footer>
+
+  <script>
+    let codeMirror;
+    document.addEventListener("DOMContentLoaded", () => {
+      codeMirror = CodeMirror(document.getElementById("codeEditor"), {
+        mode: "python",
+        lineNumbers: true,
+        indentUnit: 4,
+        tabSize: 4,
+        matchBrackets: true,
+        autoCloseBrackets: true,
+        theme: "default",
+        value: "# Ваш код здесь\nprint('Hello, World!')"
+      });
+    });
+
+    function outf(text) {
+      const output = document.getElementById("output");
+      output.innerHTML += text + "\n";
+    }
+
+    function builtinRead(x) {
+      if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined) {
+        throw `File not found: '${x}'`;
+      }
+      return Sk.builtinFiles["files"][x];
+    }
+
+    function runPython() {
+      const code = codeMirror.getValue();
+      const input = document.getElementById("inputArea").value;
+      const output = document.getElementById("output");
+      output.innerHTML = ""; // Очистка предыдущего результата
+
+      Sk.pre = "output";
+      Sk.configure({
+        output: outf,
+        read: builtinRead,
+        inputfun: function() {
+          return input.split("\n").shift(); // Берёт одну строку из поля ввода
+        },
+        inputfunTakesPrompt: true
+      });
+
+      Sk.misceval.asyncToPromise(() => Sk.importMainWithBody("<stdin>", false, code))
+        .then(() => outf("\n[Программа завершена]"))
+        .catch(err => outf(err.toString()));
+    }
+  </script>
 </body>
 </html>
