@@ -208,17 +208,17 @@
     async function runTests() {
   const code = codeMirror.getValue();
   const testCases = [
-  { input: { 5\n }, expectedOutput: 120\n },
-  { input: { 0\n }, expectedOutput: 1\n },
-  { input: { 1\n }, expectedOutput: 1\n },
-  { input: { 10\n }, expectedOutput: 3628800\n },
-  { input: { 7\n }, expectedOutput: 5040\n },
-  { input: { -2\n }, expectedOutput: "Error" },
-  { input: { 15\n }, expectedOutput: 1307674368000\n },
-  { input: { 20\n }, expectedOutput: 2432902008176640000\n },
-  { input: { 25\n }, expectedOutput: "Error" },
-  { input: { 3.14\n }, expectedOutput: "Error" }
-];
+    { input: { "5\n" }, expectedOutput: "120\n" },
+    { input: { "0\n" }, expectedOutput: "1\n" },
+    { input: { "1\n" }, expectedOutput: "1\n" },
+    { input: { "10\n" }, expectedOutput: "3628800\n" },
+    { input: { "7\n" }, expectedOutput: "5040\n" },
+    { input: { "-2\n" }, expectedOutput: "Error" },
+    { input: { "15\n" }, expectedOutput: "1307674368000\n" },
+    { input: { "20\n" }, expectedOutput: "2432902008176640000\n" },
+    { input: { "25\n" }, expectedOutput: "Error" },
+    { input: { "3.14\n" }, expectedOutput: "Error" }
+  ];
 
   let score = 0;
   for (const testCase of testCases) {
