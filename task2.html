@@ -118,12 +118,11 @@
       color: white;
     }
 
-    /* Убираем центрирование текста в редакторе */
     #codeEditor {
       border: 1px solid #ccc;
       border-radius: 5px;
       height: 300px;
-      text-align: left; /* Убираем центрирование текста */
+      text-align: left;
     }
   </style>
 </head>
@@ -243,9 +242,8 @@
 
   const result = document.getElementById("test-result");
   result.textContent = `Вы набрали ${score} из 100 баллов. ${score === 100 ? "Задача решена!" : "Попробуйте еще раз."}`;
-
-  // Обновляем статистику
   updateStats(score);
 }
+  </script>
 </body>
 </html>
