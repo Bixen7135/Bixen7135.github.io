@@ -155,7 +155,7 @@
 
   <footer>
     <p>© 2024 Учебный портал Python. Все права защищены. by Asan Bakhytzhan & Dias Assylbek</p>
-</footer>
+  </footer>
 
   <script>
     let codeMirror;
@@ -188,14 +188,14 @@
       const code = codeMirror.getValue();
       const input = document.getElementById("inputArea").value;
       const output = document.getElementById("output");
-      output.innerHTML = ""; // Очистка предыдущего результата
+      output.innerHTML = "";
 
       Sk.pre = "output";
       Sk.configure({
         output: outf,
         read: builtinRead,
         inputfun: function() {
-          return input.split("\n").shift(); // Берёт одну строку из поля ввода
+          return input.split("\n").shift();
         },
         inputfunTakesPrompt: true
       });
@@ -206,46 +206,45 @@
     }
 
     async function runTests() {
-  const code = codeMirror.getValue();
-  const testCases = [
-          { input: "2 5\n", expectedOutput: "3\n4\n" },
-          { input: "1 6\n", expectedOutput: "2\n3\n4\n5\n" },
-          { input: "0 10\n", expectedOutput: "1\n2\n3\n4\n5\n6\n7\n8\n9\n" },
-          { input: "10 15\n", expectedOutput: "11\n12\n13\n14\n" },
-          { input: "-5 5\n", expectedOutput: "-4\n-3\n-2\n-1\n0\n1\n2\n3\n4\n" },
-          { input: "-2 2\n", expectedOutput: "-1\n0\n1\n" },
-          { input: "3 8\n", expectedOutput: "4\n5\n6\n7\n" },
-          { input: "6 12\n", expectedOutput: "7\n8\n9\n10\n11\n" },
-          { input: "7 9\n", expectedOutput: "8\n" },
-          { input: "100 110\n", expectedOutput: "101\n102\n103\n104\n105\n106\n107\n108\n109\n" }
+      const code = codeMirror.getValue();
+      const testCases = [
+        { input: "2 5\n", expectedOutput: "3\n4\n" },
+        { input: "1 6\n", expectedOutput: "2\n3\n4\n5\n" },
+        { input: "0 10\n", expectedOutput: "1\n2\n3\n4\n5\n6\n7\n8\n9\n" },
+        { input: "10 15\n", expectedOutput: "11\n12\n13\n14\n" },
+        { input: "-5 5\n", expectedOutput: "-4\n-3\n-2\n-1\n0\n1\n2\n3\n4\n" },
+        { input: "-2 2\n", expectedOutput: "-1\n0\n1\n" },
+        { input: "3 8\n", expectedOutput: "4\n5\n6\n7\n" },
+        { input: "6 12\n", expectedOutput: "7\n8\n9\n10\n11\n" },
+        { input: "7 9\n", expectedOutput: "8\n" },
+        { input: "100 110\n", expectedOutput: "101\n102\n103\n104\n105\n106\n107\n108\n109\n" }
       ];
 
-  let score = 0;
-  for (const testCase of testCases) {
-    let output = "";
-    Sk.configure({
-      output: (text) => output += text,
-      read: builtinRead,
-      inputfun: () => testCase.input,
-      inputfunTakesPrompt: true
-    });
+      let score = 0;
+      for (const testCase of testCases) {
+        let output = "";
+        Sk.configure({
+          output: (text) => output += text,
+          read: builtinRead,
+          inputfun: () => testCase.input,
+          inputfunTakesPrompt: true
+        });
 
-    try {
-      await Sk.misceval.asyncToPromise(() => Sk.importMainWithBody("<stdin>", false, code));
-      if (output.trim() === testCase.expectedOutput.trim()) {
-        score += 10;
+        try {
+          await Sk.misceval.asyncToPromise(() => Sk.importMainWithBody("<stdin>", false, code));
+          if (output.trim() === testCase.expectedOutput.trim()) {
+            score += 10;
+          }
+        } catch (err) {
+          output += `Ошибка: ${err}`;
+        }
       }
-    } catch (err) {
-      output += `Ошибка: ${err}`;
+
+      const result = document.getElementById("test-result");
+      result.textContent = `Вы набрали ${score} из 100 баллов. ${score === 100 ? "Задача решена!" : "Попробуйте еще раз."}`;
+
+      updateStats(score);
     }
-  }
-
-  const result = document.getElementById("test-result");
-  result.textContent = `Вы набрали ${score} из 100 баллов. ${score === 100 ? "Задача решена!" : "Попробуйте еще раз."}`;
-
-  // Обновляем статистику
-  updateStats(score);
-}
   </script>
 </body>
 </html>
