@@ -155,7 +155,7 @@
 
   <footer>
     <p>© 2024 Учебный портал Python. Все права защищены. by Asan Bakhytzhan & Dias Assylbek</p>
-</footer>
+  </footer>
 
   <script>
     let codeMirror;
@@ -188,14 +188,14 @@
       const code = codeMirror.getValue();
       const input = document.getElementById("inputArea").value;
       const output = document.getElementById("output");
-      output.innerHTML = ""; // Очистка предыдущего результата
+      output.innerHTML = "";
 
       Sk.pre = "output";
       Sk.configure({
         output: outf,
         read: builtinRead,
         inputfun: function() {
-          return input.split("\n").shift(); // Берёт одну строку из поля ввода
+          return input.split("\n").shift();
         },
         inputfunTakesPrompt: true
       });
@@ -206,46 +206,43 @@
     }
 
     async function runTests() {
-  const code = codeMirror.getValue();
-  const testCases = [
-    { input: { "5\n" }, expectedOutput: "15\n" },
-    { input: { "10\n" }, expectedOutput: "55\n" },
-    { input: { "0\n" }, expectedOutput: "0\n" },
-    { input: { "1\n" }, expectedOutput: "1\n" },
-    { input: { "100\n" }, expectedOutput: "5050\n" },
-    { input: { "-5\n" }, expectedOutput: "0\n" },
-    { input: { "1000\n" }, expectedOutput: "500500\n" },
-    { input: { "5000\n" }, expectedOutput: "12502500\n" },
-    { input: { "2147483647\n" }, expectedOutput: "4633810850074662155\n" },
-    { input: { "-2\n" }, expectedOutput: "0\n" }
-  ];
+      const code = codeMirror.getValue();
+      const testCases = [
+        { input: { "5\n" }, expectedOutput: "15\n" },
+        { input: { "10\n" }, expectedOutput: "55\n" },
+        { input: { "0\n" }, expectedOutput: "0\n" },
+        { input: { "1\n" }, expectedOutput: "1\n" },
+        { input: { "100\n" }, expectedOutput: "5050\n" },
+        { input: { "-5\n" }, expectedOutput: "0\n" },
+        { input: { "1000\n" }, expectedOutput: "500500\n" },
+        { input: { "5000\n" }, expectedOutput: "12502500\n" },
+        { input: { "2147483647\n" }, expectedOutput: "4633810850074662155\n" },
+        { input: { "-2\n" }, expectedOutput: "0\n" }
+      ];
 
-  let score = 0;
-  for (const testCase of testCases) {
-    let output = "";
-    Sk.configure({
-      output: (text) => output += text,
-      read: builtinRead,
-      inputfun: () => testCase.input,
-      inputfunTakesPrompt: true
-    });
+      let score = 0;
+      for (const testCase of testCases) {
+        let output = "";
+        Sk.configure({
+          output: (text) => output += text,
+          read: builtinRead,
+          inputfun: () => testCase.input,
+          inputfunTakesPrompt: true
+        });
 
-    try {
-      await Sk.misceval.asyncToPromise(() => Sk.importMainWithBody("<stdin>", false, code));
-      if (output.trim() === testCase.expectedOutput.trim()) {
-        score += 10;
+        try {
+          await Sk.misceval.asyncToPromise(() => Sk.importMainWithBody("<stdin>", false, code));
+          if (output.trim() === testCase.expectedOutput.trim()) {
+            score += 10;
+          }
+        } catch (err) {
+          output += `Ошибка: ${err}`;
+        }
       }
-    } catch (err) {
-      output += `Ошибка: ${err}`;
+
+      const result = document.getElementById("test-result");
+      result.textContent = `Вы набрали ${score} из 100 баллов. ${score === 100 ? "Задача решена!" : "Попробуйте еще раз."}`;
     }
-  }
-
-  const result = document.getElementById("test-result");
-  result.textContent = `Вы набрали ${score} из 100 баллов. ${score === 100 ? "Задача решена!" : "Попробуйте еще раз."}`;
-
-  // Обновляем статистику
-  updateStats(score);
-}
   </script>
 </body>
 </html>
