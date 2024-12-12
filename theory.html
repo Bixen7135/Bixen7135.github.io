@@ -160,7 +160,7 @@
   </nav>
 
   <main>
-<section>
+    <section>
       <h2>1. Что такое цикл?</h2>
       <p>Цикл — это команда компьютеру повторять одно и то же действие несколько раз.</p>
       <p>Пример из жизни: если нужно 5 раз сказать "Привет!" другу, ты можешь сделать это вручную или попросить кого-то сделать это за тебя.</p>
@@ -328,7 +328,7 @@ for i in range(3):
 
   <footer>
     <p>© 2024 Учебный портал Python. Все права защищены. by Asan Bakhytzhan & Dias Assylbek</p>
-</footer>
+  </footer>
   
   <script>
     let codeMirror;
@@ -341,7 +341,7 @@ for i in range(3):
         matchBrackets: true,
         autoCloseBrackets: true,
         theme: "default",
-        value: `# Попробуйте изменить этот код и запустить\nfor i in range(3):\n    print(i * 2)`
+        value: `for i in range(3):\n    print(i * 2)`
       });
     });
 
@@ -361,14 +361,14 @@ for i in range(3):
       const code = codeMirror.getValue();
       const input = document.getElementById("inputArea").value;
       const output = document.getElementById("output");
-      output.innerHTML = ""; // Очистка предыдущего результата
+      output.innerHTML = "";
 
       Sk.pre = "output";
       Sk.configure({
         output: outf,
         read: builtinRead,
         inputfun: function() {
-          return input.split("\n").shift(); // Берёт одну строку из поля ввода
+          return input.split("\n").shift();
         },
         inputfunTakesPrompt: true
       });
