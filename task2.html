@@ -155,7 +155,7 @@
 
   <footer>
     <p>© 2024 Учебный портал Python. Все права защищены. by Asan Bakhytzhan & Dias Assylbek</p>
-</footer>
+  </footer>
 
   <script>
     let codeMirror;
@@ -188,14 +188,14 @@
       const code = codeMirror.getValue();
       const input = document.getElementById("inputArea").value;
       const output = document.getElementById("output");
-      output.innerHTML = ""; // Очистка предыдущего результата
+      output.innerHTML = "";
 
       Sk.pre = "output";
       Sk.configure({
         output: outf,
         read: builtinRead,
         inputfun: function() {
-          return input.split("\n").shift(); // Берёт одну строку из поля ввода
+          return input.split("\n").shift();
         },
         inputfunTakesPrompt: true
       });
@@ -206,44 +206,43 @@
     }
 
     async function runTests() {
-  const code = codeMirror.getValue();
-  const testCases = [
-          { input: "2\n", expectedOutput: "2\n4\n6\n8\n10\n12\n14\n16\n18\n20\n" },
-          { input: "5\n", expectedOutput: "5\n10\n15\n20\n25\n30\n35\n40\n45\n50\n" },
-          { input: "10\n", expectedOutput: "10\n20\n30\n40\n50\n60\n70\n80\n90\n100\n" },
-          { input: "1\n", expectedOutput: "1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n" },
-          { input: "0\n", expectedOutput: "0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n" },
-          { input: "-2\n", expectedOutput: "-2\n-4\n-6\n-8\n-10\n-12\n-14\n-16\n-18\n-20\n" },
-          { input: "100\n", expectedOutput: "100\n200\n300\n400\n500\n600\n700\n800\n900\n1000\n" },
-          { input: "11\n", expectedOutput: "11\n22\n33\n44\n55\n66\n77\n88\n99\n110\n" },
-          { input: "999\n", expectedOutput: "999\n1998\n2997\n3996\n4995\n5994\n6993\n7992\n8991\n9990\n" },
-          { input: "1000\n", expectedOutput: "1000\n2000\n3000\n4000\n5000\n6000\n7000\n8000\n9000\n10000\n" }
+      const code = codeMirror.getValue();
+      const testCases = [
+        { input: "2\n", expectedOutput: "2\n4\n6\n8\n10\n12\n14\n16\n18\n20\n" },
+        { input: "5\n", expectedOutput: "5\n10\n15\n20\n25\n30\n35\n40\n45\n50\n" },
+        { input: "10\n", expectedOutput: "10\n20\n30\n40\n50\n60\n70\n80\n90\n100\n" },
+        { input: "1\n", expectedOutput: "1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n" },
+        { input: "0\n", expectedOutput: "0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n" },
+        { input: "-2\n", expectedOutput: "-2\n-4\n-6\n-8\n-10\n-12\n-14\n-16\n-18\n-20\n" },
+        { input: "100\n", expectedOutput: "100\n200\n300\n400\n500\n600\n700\n800\n900\n1000\n" },
+        { input: "11\n", expectedOutput: "11\n22\n33\n44\n55\n66\n77\n88\n99\n110\n" },
+        { input: "999\n", expectedOutput: "999\n1998\n2997\n3996\n4995\n5994\n6993\n7992\n8991\n9990\n" },
+        { input: "1000\n", expectedOutput: "1000\n2000\n3000\n4000\n5000\n6000\n7000\n8000\n9000\n10000\n" }
       ];
 
-  let score = 0;
-  for (const testCase of testCases) {
-    let output = "";
-    Sk.configure({
-      output: (text) => output += text,
-      read: builtinRead,
-      inputfun: () => testCase.input,
-      inputfunTakesPrompt: true
-    });
+      let score = 0;
+      for (const testCase of testCases) {
+        let output = "";
+        Sk.configure({
+          output: (text) => output += text,
+          read: builtinRead,
+          inputfun: () => testCase.input,
+          inputfunTakesPrompt: true
+        });
 
-    try {
-      await Sk.misceval.asyncToPromise(() => Sk.importMainWithBody("<stdin>", false, code));
-      if (output.trim() === testCase.expectedOutput.trim()) {
-        score += 10;
+        try {
+          await Sk.misceval.asyncToPromise(() => Sk.importMainWithBody("<stdin>", false, code));
+          if (output.trim() === testCase.expectedOutput.trim()) {
+            score += 10;
+          }
+        } catch (err) {
+          output += `Ошибка: ${err}`;
+        }
       }
-    } catch (err) {
-      output += `Ошибка: ${err}`;
-    }
-  }
 
-  const result = document.getElementById("test-result");
-  result.textContent = `Вы набрали ${score} из 100 баллов. ${score === 100 ? "Задача решена!" : "Попробуйте еще раз."}`;
-  updateStats(score);
-}
+      const result = document.getElementById("test-result");
+      result.textContent = `Вы набрали ${score} из 100 баллов. ${score === 100 ? "Задача решена!" : "Попробуйте еще раз."}`;
+      updateStats(score);
+    }
   </script>
-</body>
-</html>
+</body
