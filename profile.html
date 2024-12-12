@@ -114,7 +114,6 @@
     .logout-btn:hover {
       background: #d32f2f;
     }
-
   </style>
 </head>
 <body>
@@ -148,7 +147,6 @@
   </footer>
 
   <script>
-    // Загружаем статистику из LocalStorage (если есть)
     function loadStats() {
       const solvedTasks = localStorage.getItem("solvedTasks") || 0;
       const totalScore = localStorage.getItem("totalScore") || 0;
@@ -157,7 +155,6 @@
       document.getElementById("total-score").innerText = `Получено баллов: ${totalScore}`;
     }
 
-    // Обновляем статистику в LocalStorage
     function updateStats(score) {
       let solvedTasks = parseInt(localStorage.getItem("solvedTasks") || "0");
       let totalScore = parseInt(localStorage.getItem("totalScore") || "0");
@@ -168,7 +165,7 @@
       localStorage.setItem("solvedTasks", solvedTasks);
       localStorage.setItem("totalScore", totalScore);
 
-      loadStats(); // Обновляем отображение статистики
+      loadStats();
     }
 
     document.addEventListener("DOMContentLoaded", loadStats);
